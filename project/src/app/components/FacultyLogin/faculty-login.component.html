@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+
+<div class="container">
+<div class="bg-image">
+</div>
+<div class="linktohome">
+  <button class="home" routerLink="/homepage"><ion-icon name="home"></ion-icon></button>
+</div>
+    <div class="form-box">
+      <div class="form-value">
+
+      <form class="border p-3" [formGroup]="angForm" (ngSubmit)="postdata(angForm)">
+
+
+  <div class="row g-0">
+    <div class="col text-center p-2 mb-3">
+      <span class="fs-3"><h2>Faculty Login</h2></span>
+    </div>
+  </div>
+  <div class="col mb-3">
+    <div class="col mb-3">
+      <div class="inputbox">
+        <ion-icon name="mail-outline"></ion-icon>
+      <input type="email" required class="form-control input-field" id="email" formControlName="faculty_email">
+      <label for="">Email</label>
+    </div>
+      <div class="form-text text-danger" *ngIf="Email.errors?.['required'] && (Email.dirty || Email.touched)">
+        Email is required
+      </div>
+      <div class="form-text text-danger" *ngIf="Email.errors?.['invalidGmail'] && (Email.dirty || Email.touched)">
+        Email ID should end with @gmail.com
+      </div>
+    </div>
+    <div class="col mb-1">
+      <div class="inputbox">
+        <ion-icon name="lock-closed-outline"></ion-icon>
+      <input type="password" required class="form-control input-field" id="password" formControlName="faculty_password">
+      <label for="">Password</label>
+      </div>
+      <div class="form-text text-danger" *ngIf="Password.errors?.['required'] && (Password.dirty || Password.touched)">
+        Password is required
+      </div>
+    </div><br>
+    <div class="d-grid">
+    <div class="row">
+    <button type="submit"  class="btn btn-primary">Submit</button><br>
+  </div>
+  </div>
+    <div class="row">
+        <!-- <div class="d-grid">
+          <div class="loginstu" style="font-size: 1.5rem;">
+
+          <a routerLink="/studentlogin">Student Login</a>
+
+        </div>
+      </div> -->
+    </div>
+    <!-- <div class="row">
+      <div class="col-6 offset-3">
+        <div class="d-grid">
+          <a routerLink="/adminlogin">Admin Login</a>
+        </div>
+        <div>
+          <a routerLink="/adminregister">Register as Admin</a>
+        </div>
+      </div>
+    </div> -->
+
+  </div>
+
+</form>
+
+
+</div>
+</div>
+</div>
+</html>
+

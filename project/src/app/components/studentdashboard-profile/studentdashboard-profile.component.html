@@ -1,0 +1,168 @@
+  <!-- Hero -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css">
+
+  <body>
+
+    <!-- <nav class="nav">
+      <a  routerLink="home" routerLinkActive="active"><img src="./assets/images/spitlogo.png"></a>
+        <ul>
+          <li><a *ngIf='logoutbtn' routerLink="" routerLinkActive="active">Alumni Connect</a></li>
+          <li><a *ngIf='loginbtn' routerLink="login" routerLinkActive="active">Login</a></li>
+          <li class="nav-item"><button type="button" *ngIf='logoutbtn' class="btn btn-block" (click)="logout()"><i class="icon ion-power"></i>  {{logged_in_username}}, logout</button></li>
+        </ul>
+      </nav> -->
+      <div id="textbox">
+        <p class="alignleft" *ngIf='logoutbtn' routerLink="" routerLinkActive="active">ALUMNI CONNECT</p>
+        <p class="alignright">
+          <tr>
+            <td>
+          Hey {{logged_in_username}},
+        </td>
+        <td>
+        <button type="button" *ngIf='logoutbtn' class="btn btn-block" (click)="logout()" style="font-size: 1.5rem;"><i class="icon ion-power"></i>
+          <ion-icon title="Logout" name="power-outline" style="font-size: 2rem; margin-bottom: -5px;"></ion-icon>
+        </button>
+      </td>
+      </tr>
+      </p>      </div>
+
+    <div style="clear: both;"></div>
+    <section class="et-hero-tabs">
+
+      <div class="et-hero-tabs-container">
+        <a class="et-hero-tab" routerLink="/studentdashboard">Look for Job</a>
+        <a class="et-hero-tab" routerLink="/postjobs">Post Jobs</a>
+        <a class="et-hero-tab" routerLink="/guidance">Insights</a>
+        <a class="et-hero-tab" routerLink="/ouralumni"> Ex-Classmates</a>
+        <a class="et-hero-tab" routerLink="#about"><div style="text-decoration: underline;"><b>Profile</b></div></a>
+        <span class="et-hero-tab-slider"></span>
+      </div>
+    </section>
+
+    <!-- Main -->
+    <main class="et-main">
+
+
+      <section class="et-slide section about-section gray-bg" id="about">
+        <div class="container">
+
+
+
+          <!-- profile card -->
+
+  <div class="padding">
+    <div class="row container d-flex justify-content-center">
+<div class="col-xl-6 col-md-12">
+<div class="card user-card-full">
+    <div class="row m-l-0 m-r-0">
+        <div class="col-sm-4 bg-c-lite-green user-profile">
+            <div class="card-block text-center text-white">
+              <div class="d-flex flex-column align-items-center text-center">
+                <div class="m-b-25">
+                  <img src="{{profile_pic_url}}" class="img-radius" onerror="if (this.src != 'error.jpg') this.src = 'https://bootdey.com/img/Content/avatar/avatar6.png'; " >
+                    <br><br><br>
+
+                    <input *ngIf="isEditMode" type="file" name="profile_pic" id="formFile" (change)="uploadfile($event)">
+                    <br><br>
+                    <button *ngIf="isEditMode" id="mini-profile-save" class="btn btn-primary px-4" style="background-color: white; color: darkblue; border: white; font-size: 12px;" (click)="mini_profile_save()"> Save Changes</button>
+                  </div>
+                  </div>
+                <h6 class="f-w-600">{{stud_name_bolte}}</h6><br>
+                <p class="role">{{sp_designation_bolte}}</p>
+
+                <!-- <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i> -->
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="card-block"><br>
+              <form action="" [formGroup]="angForm" (ngSubmit)="postdata(angForm)">
+                <h6 class="m-b-20 p-b-5 b-b-default f-w-600">
+                  Personal Information  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <i *ngIf="notEditMode" (click)="enableInput()" class='fa fa-edit edit' title="Edit" id="edit" style="font-size: 33px;"></i>
+                  <button *ngIf="isEditMode" class="close-button" (click)="closeEditMode()">Reset</button>
+                  </h6>
+                <h3 style="font-size: 12px; margin-top: -12px; text-align: left;"  *ngIf="notEditMode" >Click on the edit button to start editing!</h3>
+                <br><br>
+                <div class="row">
+                <div class="col-sm-6">
+                        <p class="m-b-10 f-w-600">Name</p>
+                        <h6 class="text-muted f-w-400"><input type="text" name="name" [readonly]="isInputDisabled" id="stud_name" placeholder="Name" formControlName="stud_name"> </h6>
+                    </div>
+                    <div class="col-sm-6">
+                      <p class="m-b-10 f-w-600">Email</p>
+                      <h6 class="text-muted f-w-400"><input type="email" name="email" [readonly]="isInputDisabled" id="sp_email" formControlName="sp_email" placeholder="Email-Id"> </h6>
+                  </div>
+                  </div><br>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p class="m-b-10 f-w-600">Phone</p>
+                        <h6 class="text-muted f-w-400"><input type="text" name="mobile" [readonly]="isInputDisabled" id="sp_mobile" formControlName="sp_mobile" placeholder="Mobile No"></h6>
+                    </div>
+                    <div class="col-sm-6">
+                      <p class="m-b-10 f-w-600">Date of Birth</p>
+                      <h6 class="text-muted f-w-400"><input type="date" [readonly]="isInputDisabled" id="sp_dob" formControlName="sp_dob"></h6>
+                  </div>
+                </div><br>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <p class="m-b-10 f-w-600">Location</p>
+                    <h6 class="text-muted f-w-400"><input type="text" [readonly]="isInputDisabled" id="sp_location" formControlName="sp_location" name="location" placeholder="State,Country"></h6>
+                </div>
+              </div>
+
+                <br><br><br>
+
+                <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Career Particulars</h6>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p class="m-b-10 f-w-600">Job Role</p>
+                        <h6 class="text-muted f-w-400"><input type="text" [readonly]="isInputDisabled" id="sp_designation" formControlName="sp_designation" placeholder="Job Role"></h6>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="m-b-10 f-w-600">Company</p>
+                        <h6 class="text-muted f-w-400"><input type="text" [readonly]="isInputDisabled" id="sp_company" formControlName="sp_company" placeholder="Company Name"></h6>
+                    </div>
+                </div>
+
+                <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Socials</h6>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p class="m-b-10 f-w-600">
+                          <label>
+                          <a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="linkedin" data-abc="true"><i class="mdi mdi-linkedin feather icon-linkedin linkedin" aria-hidden="true"></i></a>
+                      </label>
+                      </p>
+
+                        <h6 class="text-muted f-w-400"><input type="text" [readonly]="isInputDisabled" id="sp_linkedin" formControlName="sp_linkedin" placeholder="Linked-Id"></h6>
+                    </div>
+
+                </div>
+                <div class="row">
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-9 text-secondary">
+                      <div class="set">
+                        <button *ngIf="isEditMode" name="submit" id="submit">Save Changes</button>
+                      </div>
+                  </div>
+              </div>
+              </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+     </div>
+      </section>
+
+    </main>
+    <script src="src/app/components/StudentDashboard/stickynavbar.component.js"></script>
+
+  </body>
